@@ -11,6 +11,7 @@ import android.view.View;
 
 public class MainActivity extends Activity {
     //this is a change
+    //this is also a change
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
