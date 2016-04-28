@@ -1,7 +1,12 @@
 package edu.umd.cmarlee.notedriver;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +32,34 @@ public class NoteAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public int getSize(){
+    public int getCount(){
         return mNotes.size();
     }
 
     public Object getItem(int pos){
         return mNotes.get(pos);
+
+    }
+    public long getItemId(int pos){
+        return pos;
+    }
+    public View getView(int pos, View convertView, ViewGroup parent){
+        final Note note = (Note) getItem(pos);
+        RelativeLayout noteLayout = (RelativeLayout) LayoutInflater.from(mContext).inflate(
+                R.layout.note_layout, null);
+        final TextView subjectView = (TextView) noteLayout.findViewById(R.id.subjectView);
+
+        subjectView.setText(note.getSubject());
+
+        final TextView dateView = (TextView) noteLayout.findViewById(R.id.dateView);
+        dateView.setText(Note.FORMAT.format(note.getDate()));
+
+
+        return noteLayout;
+
+
+
+
 
     }
 
