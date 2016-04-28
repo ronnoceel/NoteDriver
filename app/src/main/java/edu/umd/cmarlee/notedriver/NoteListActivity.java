@@ -41,7 +41,7 @@ public class NoteListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note_lister);
+        //setContentView(R.layout.note_lister);
 
         lv = getListView();
 

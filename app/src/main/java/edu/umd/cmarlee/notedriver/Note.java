@@ -64,7 +64,7 @@ public class Note {
                                      Date date){
         intent.putExtra(Note.TEXT, text);
         intent.putExtra(Note.SUBJECT, subject);
-        intent.putExtra(Note.DATE, date);
+        intent.putExtra(Note.DATE, FORMAT.format(date));
 
     }
 
