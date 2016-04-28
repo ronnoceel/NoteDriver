@@ -23,7 +23,7 @@ import java.util.Date;
 public class NoteListActivity extends ListActivity {
 
     private static final int ADD_TODO_ITEM_REQUEST = 0;
-    private static final String FILE_NAME = "NotesList.txt";
+    private static final String FILE_NAME = "NotesList1.txt";
     private static final String TAG = "NoteDriver";
 
     private static final int ADD_REQUEST_CODE = 1;
@@ -121,6 +121,8 @@ public class NoteListActivity extends ListActivity {
     //TODO: REDO this method! It will only read one line at a time for each field of the Note object.
     private void loadItems() {
         BufferedReader reader = null;
+        //TODO: get rid of the saveItems() (line below) when we have actual file writing.
+        saveItems();
         try {
             FileInputStream fis = openFileInput(FILE_NAME);
             reader = new BufferedReader(new InputStreamReader(fis));
@@ -129,7 +131,7 @@ public class NoteListActivity extends ListActivity {
             String subject = null;
             Date date = null;
 
-            while (null != (subject = reader.readLine())) {
+            while ((subject = reader.readLine()) != null) {
                 //TODO: Never gets here... figure this one out pls
                 Log.i(TAG, "got here");
 
@@ -140,6 +142,7 @@ public class NoteListActivity extends ListActivity {
                 mAdapter.add(note);
 
             }
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -165,12 +168,15 @@ public class NoteListActivity extends ListActivity {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
                     fos)));
+            // temp fix for  writing notes to file
+            writer.println(new Note("this is a subject", "this is the body of our note", new Date()).toString());
+            writer.println(new Note("this is a subject", "another note", new Date()).toString());
 
-            for (int idx = 0; idx < mAdapter.getCount(); idx++) {
+            /*for (int idx = 0; idx < mAdapter.getCount(); idx++) {
 
                 writer.println(mAdapter.getItem(idx));
 
-            }
+            }*/
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

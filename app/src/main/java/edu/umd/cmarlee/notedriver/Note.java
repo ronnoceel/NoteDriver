@@ -26,7 +26,7 @@ public class Note {
     private Date mDate = new Date();
 
 
-    Note(String text, String subject, Date date){
+    Note(String subject, String text, Date date){
         this.mText = text;
         this.mSubject = subject;
         this.mDate = date;
@@ -51,7 +51,7 @@ public class Note {
     public String getSubject(){
         return mSubject;
     }
-    public void setSuject(String subject){
+    public void setSubject(String subject){
         mSubject = subject;
     }
     public Date getDate(){
@@ -61,7 +61,7 @@ public class Note {
         mDate = date;
     }
 
-    public static void packageIntent(Intent intent, String text,String subject,
+    public static void packageIntent(Intent intent, String subject ,String text,
                                      Date date){
         intent.putExtra(Note.TEXT, text);
         intent.putExtra(Note.SUBJECT, subject);
@@ -70,7 +70,7 @@ public class Note {
     }
 
     public String toString() {
-        return mText + ITEM_SEP + mSubject + ITEM_SEP + FORMAT.format(mDate);
+        return mSubject + ITEM_SEP + mText + ITEM_SEP + FORMAT.format(mDate);
     }
 
     public String toLog() {
