@@ -1,10 +1,10 @@
 package edu.umd.cmarlee.notedriver;
 
-import android.app.Activity;
+import android.app.ListActivity;
 
 /**
  * Created by connor on 4/27/16.
  */
-public class NoteListActivity extends Activity {
+public class NoteListActivity extends ListActivity {
 
 }

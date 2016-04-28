@@ -1,12 +1,12 @@
 package edu.umd.cmarlee.notedriver;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 public class ListenerActivity extends Activity {
 
@@ -14,13 +14,13 @@ public class ListenerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listener_view);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button notes_button = (Button) findViewById(R.id.notes_button);
+        notes_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(this, NodeAdapter.class);
+                Intent intent = new Intent(getApplicationContext(), NoteListActivity.class);
+                startActivity(intent);
             }
         });
     }
