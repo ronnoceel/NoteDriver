@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,15 +36,53 @@ public class NoteListActivity extends ListActivity {
     private static final int MENU_DUMP = Menu.FIRST + 1;
 
     NoteAdapter mAdapter;
+    private ListView lv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.note_lister);
+
+        lv = getListView();
 
         mAdapter = new NoteAdapter(getApplicationContext());
 
         getListView().setAdapter(mAdapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position , long id) {
+
+                Note note = (Note) adapter.getItemAtPosition(position);
+                Intent intent = new Intent(NoteListActivity.this, NoteView.class);
+                Note.packageIntent(intent,note.getText(),note.getSubject(),note.getDate());
+                startActivity(intent);
+            }
+
+
+        });
+
+        PrintWriter writer = null;
+        try {
+            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
+                    fos)));
+
+            writer.println("This is a subject");
+            writer.println("This is example text");
+            writer.println("2016-12-05 02:36:11");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (null != writer) {
+                writer.close();
+            }
+        }
+
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

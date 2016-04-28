@@ -57,17 +57,6 @@ public class NoteAdapter extends BaseAdapter {
 
         return noteLayout;
 
-
-
-
-
     }
-
-
-
-
-
-
-
 
 }

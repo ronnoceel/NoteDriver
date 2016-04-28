@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".NoteListActivity">
         </activity>
+        <activity android:name=".NoteView">
+    </activity>
     </application>
 
 </manifest>
