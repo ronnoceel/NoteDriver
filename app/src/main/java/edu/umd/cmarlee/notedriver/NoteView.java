@@ -18,7 +18,7 @@ public class NoteView extends Activity {
 
     protected void OnCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note_view);
+        //setContentView(R.layout.note_view);
 
         Intent intent = getIntent();
 
@@ -34,7 +34,6 @@ public class NoteView extends Activity {
         } catch (ParseException e) {
             date = new Date();
         }
-
 
         TextView subjectView = (TextView) findViewById(R.id.noteSubjectView);
         TextView textView = (TextView) findViewById(R.id.noteTextView);
