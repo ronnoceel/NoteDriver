@@ -12,7 +12,6 @@ import java.util.Locale;
  */
 public class Note {
 
-
     public final static String TEXT = "text";
     public final static String SUBJECT = "subject";
     public final static String DATE = "date";
