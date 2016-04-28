@@ -124,15 +124,21 @@ public class NoteListActivity extends ListActivity {
         try {
             FileInputStream fis = openFileInput(FILE_NAME);
             reader = new BufferedReader(new InputStreamReader(fis));
-
+            Log.i(TAG, "File was read");
             String text = null;
             String subject = null;
             Date date = null;
 
-            while (null != (text = reader.readLine())) {
-                subject = reader.readLine();
+            while (null != (subject = reader.readLine())) {
+                //TODO: Never gets here... figure this one out pls
+                Log.i(TAG, "got here");
+
+                text = reader.readLine();
                 date = Note.FORMAT.parse(reader.readLine());
-                mAdapter.add(new Note(text, subject, date));
+                Note note = new Note(text, subject, date);
+
+                mAdapter.add(note);
+
             }
 
         } catch (FileNotFoundException e) {
