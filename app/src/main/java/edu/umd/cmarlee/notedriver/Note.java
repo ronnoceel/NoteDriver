@@ -2,6 +2,7 @@ package edu.umd.cmarlee.notedriver;
 
 import android.content.Intent;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -29,6 +30,16 @@ public class Note {
         this.mText = text;
         this.mSubject = subject;
         this.mDate = date;
+    }
+    Note(Intent intent){
+        mText = intent.getStringExtra(Note.TEXT);
+        mSubject = intent.getStringExtra(Note.SUBJECT);
+        try {
+            mDate = Note.FORMAT.parse(intent.getStringExtra(Note.DATE));
+        } catch (ParseException e) {
+            mDate = new Date();
+        }
+
     }
 
     public String getText(){
