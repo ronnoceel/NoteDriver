@@ -69,5 +69,14 @@ public class Note {
 
     }
 
+    public String toString() {
+        return mText + ITEM_SEP + mSubject + ITEM_SEP + FORMAT.format(mDate);
+    }
+
+    public String toLog() {
+        return "Text:" + mText + ITEM_SEP + "Subject:" + mSubject
+                + ITEM_SEP + "Date:" + FORMAT.format(mDate) + "\n";
+    }
+
 
 }
