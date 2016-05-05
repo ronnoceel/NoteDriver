@@ -54,7 +54,7 @@ public class NoteListActivity extends ListActivity {
             public void onItemClick(AdapterView<?> adapter, View v, int position , long id) {
 
                 Note note = (Note) adapter.getItemAtPosition(position);
-                Intent intent = new Intent(NoteListActivity.this, NoteView.class);
+                Intent intent = new Intent(getApplicationContext(), NoteView.class);
                 Note.packageIntent(intent,note.getText(),note.getSubject(),note.getDate());
                 startActivity(intent);
             }

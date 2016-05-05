@@ -16,7 +16,7 @@ public class NoteView extends Activity {
 
     final String TAG = "NoteDriver";
 
-    protected void OnCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_view);
 
@@ -27,6 +27,7 @@ public class NoteView extends Activity {
         Log.i(TAG, "Subject is: " + subject);
 
         String text = intent.getStringExtra(Note.TEXT);
+        Log.i(TAG, "Text is: " + text);
         Date date;
 
         try {
@@ -35,6 +36,7 @@ public class NoteView extends Activity {
             date = new Date();
         }
 
+        Log.i(TAG, "Date is: " + date.toString());
 
         TextView subjectView = (TextView) findViewById(R.id.noteSubjectView);
         TextView textView = (TextView) findViewById(R.id.noteTextView);
