@@ -70,7 +70,7 @@ public class NoteListActivity extends ListActivity {
 
             writer.println("This is a subject");
             writer.println("This is example text");
-            writer.println("2016-12-05 02:36:11");
+            writer.println(Note.FORMAT.format(new Date()));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,10 +89,6 @@ public class NoteListActivity extends ListActivity {
 
         Log.i(TAG, "Entered onActivityResult()");
 
-        // TODO - Check result code and request code
-        // if user submitted a new ToDoItem
-        // Create a new ToDoItem from the data Intent
-        // and then add it to the adapter
         switch (resultCode) {
             case RESULT_CANCELED:
                 Log.i(TAG, "Returned after canceling");
@@ -165,14 +161,11 @@ public class NoteListActivity extends ListActivity {
         try {
             FileInputStream fis = openFileInput(FILE_NAME);
             reader = new BufferedReader(new InputStreamReader(fis));
-            Log.i(TAG, "File was read");
             String text = null;
             String subject = null;
             Date date = null;
 
             while (null != (subject = reader.readLine())) {
-                //TODO: Never gets here... figure this one out pls
-                Log.i(TAG, "got here");
 
                 text = reader.readLine();
                 date = Note.FORMAT.parse(reader.readLine());

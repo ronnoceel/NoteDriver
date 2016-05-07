@@ -24,12 +24,12 @@ public class Note {
     private String mSubject = new String();
     private Date mDate = new Date();
 
-
     Note(String text, String subject, Date date){
         this.mText = text;
         this.mSubject = subject;
         this.mDate = date;
     }
+
     Note(Intent intent){
         mText = intent.getStringExtra(Note.TEXT);
         mSubject = intent.getStringExtra(Note.SUBJECT);
