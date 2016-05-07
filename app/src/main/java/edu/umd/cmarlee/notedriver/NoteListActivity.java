@@ -89,10 +89,6 @@ public class NoteListActivity extends ListActivity {
 
         Log.i(TAG, "Entered onActivityResult()");
 
-        // TODO - Check result code and request code
-        // if user submitted a new ToDoItem
-        // Create a new ToDoItem from the data Intent
-        // and then add it to the adapter
         switch (resultCode) {
             case RESULT_CANCELED:
                 Log.i(TAG, "Returned after canceling");
