@@ -100,13 +100,11 @@ public class NoteListActivity extends ListActivity {
         }
     }
 
-    // Do not modify below here
 
     @Override
     public void onResume() {
         super.onResume();
 
-        // Load saved ToDoItems, if necessary
 
         if (mAdapter.getCount() == 0)
             loadItems();
@@ -154,8 +152,7 @@ public class NoteListActivity extends ListActivity {
 
     }
 
-    // Load stored ToDoItems
-    //TODO: REDO this method! It will only read one line at a time for each field of the Note object.
+
     private void loadItems() {
         BufferedReader reader = null;
         try {
@@ -167,8 +164,6 @@ public class NoteListActivity extends ListActivity {
             Date date = null;
 
             while (null != (subject = reader.readLine())) {
-                //TODO: Never gets here... figure this one out pls
-                Log.i(TAG, "got here");
 
                 text = reader.readLine();
                 date = Note.FORMAT.parse(reader.readLine());
