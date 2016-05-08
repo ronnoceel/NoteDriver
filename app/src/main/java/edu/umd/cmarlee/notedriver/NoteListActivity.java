@@ -58,14 +58,8 @@ public class NoteListActivity extends ListActivity {
                 Note.packageIntent(intent,note.getText(),note.getDate());
                 startActivity(intent);
             }
-
-
         });
-
-
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -82,7 +76,6 @@ public class NoteListActivity extends ListActivity {
                 break;
         }
     }
-
 
     @Override
     public void onResume() {
@@ -141,17 +134,16 @@ public class NoteListActivity extends ListActivity {
         try {
             FileInputStream fis = openFileInput(FILE_NAME);
             reader = new BufferedReader(new InputStreamReader(fis));
-            Log.i(TAG, "File was read");
             String text = null;
             Date date = null;
 
             while (null != (text = reader.readLine())) {
-
+                Log.i(TAG, "Text is :" + text);
                 date = Note.FORMAT.parse(reader.readLine());
                 Note note = new Note(text,date);
+                Log.i(TAG, "Date is :" + date);
 
                 mAdapter.add(note);
-
             }
 
         } catch (FileNotFoundException e) {

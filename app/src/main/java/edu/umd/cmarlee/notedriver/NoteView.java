@@ -22,10 +22,6 @@ public class NoteView extends Activity {
 
         Intent intent = getIntent();
 
-        String subject = intent.getStringExtra(Note.SUBJECT);
-
-        Log.i(TAG, "Subject is: " + subject);
-
         String text = intent.getStringExtra(Note.TEXT);
         Log.i(TAG, "Text is: " + text);
         Date date;
