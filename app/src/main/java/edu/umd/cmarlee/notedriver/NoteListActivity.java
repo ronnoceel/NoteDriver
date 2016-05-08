@@ -62,23 +62,6 @@ public class NoteListActivity extends ListActivity {
 
         });
 
-        PrintWriter writer = null;
-        try {
-            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
-            writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
-                    fos)));
-
-            writer.println("This is a subject");
-            writer.println("This is example text");
-            writer.println(Note.FORMAT.format(new Date()));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (null != writer) {
-                writer.close();
-            }
-        }
 
     }
 
@@ -100,13 +83,11 @@ public class NoteListActivity extends ListActivity {
         }
     }
 
-    // Do not modify below here
 
     @Override
     public void onResume() {
         super.onResume();
 
-        // Load saved ToDoItems, if necessary
 
         if (mAdapter.getCount() == 0)
             loadItems();
@@ -154,13 +135,13 @@ public class NoteListActivity extends ListActivity {
 
     }
 
-    // Load stored ToDoItems
-    //TODO: REDO this method! It will only read one line at a time for each field of the Note object.
+
     private void loadItems() {
         BufferedReader reader = null;
         try {
             FileInputStream fis = openFileInput(FILE_NAME);
             reader = new BufferedReader(new InputStreamReader(fis));
+            Log.i(TAG, "File was read");
             String text = null;
             String subject = null;
             Date date = null;
