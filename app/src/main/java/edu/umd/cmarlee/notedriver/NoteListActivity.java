@@ -143,12 +143,10 @@ public class NoteListActivity extends ListActivity {
             reader = new BufferedReader(new InputStreamReader(fis));
             Log.i(TAG, "File was read");
             String text = null;
-            String subject = null;
             Date date = null;
 
-            while (null != (subject = reader.readLine())) {
+            while (null != (text = reader.readLine())) {
 
-                text = reader.readLine();
                 date = Note.FORMAT.parse(reader.readLine());
                 Note note = new Note(text,date);
 

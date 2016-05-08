@@ -50,7 +50,6 @@ public class ListenerActivity extends Activity {
                     FileWriter fileWriter = new FileWriter(file, true);
 
                     BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                    bufferedWriter.write("This is a subject\n");
                     bufferedWriter.write("This is example text\n");
                     bufferedWriter.write(Note.FORMAT.format(new Date())+"\n");
                     bufferedWriter.close();

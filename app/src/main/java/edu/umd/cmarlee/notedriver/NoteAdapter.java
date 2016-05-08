@@ -47,9 +47,9 @@ public class NoteAdapter extends BaseAdapter {
         final Note note = (Note) getItem(pos);
         RelativeLayout noteLayout = (RelativeLayout) LayoutInflater.from(mContext).inflate(
                 R.layout.note_layout, null);
-        final TextView subjectView = (TextView) noteLayout.findViewById(R.id.subjectView);
+        final TextView note_preview= (TextView) noteLayout.findViewById(R.id.note_preview);
 
-        subjectView.setText(note.getSubject());
+        note_preview.setText(note.getText());
 
         final TextView dateView = (TextView) noteLayout.findViewById(R.id.dateView);
         dateView.setText(Note.FORMAT.format(note.getDate()));
