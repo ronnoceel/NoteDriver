@@ -62,23 +62,6 @@ public class NoteListActivity extends ListActivity {
 
         });
 
-        PrintWriter writer = null;
-        try {
-            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
-            writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
-                    fos)));
-
-            writer.println("This is a subject");
-            writer.println("This is example text");
-            writer.println("2016-12-05 02:36:11");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (null != writer) {
-                writer.close();
-            }
-        }
 
     }
 
