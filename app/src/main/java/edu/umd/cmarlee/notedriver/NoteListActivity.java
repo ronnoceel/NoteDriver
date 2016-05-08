@@ -55,7 +55,7 @@ public class NoteListActivity extends ListActivity {
 
                 Note note = (Note) adapter.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), NoteView.class);
-                Note.packageIntent(intent,note.getText(),note.getSubject(),note.getDate());
+                Note.packageIntent(intent,note.getText(),note.getDate());
                 startActivity(intent);
             }
 
@@ -150,7 +150,7 @@ public class NoteListActivity extends ListActivity {
 
                 text = reader.readLine();
                 date = Note.FORMAT.parse(reader.readLine());
-                Note note = new Note(text, subject, date);
+                Note note = new Note(text,date);
 
                 mAdapter.add(note);
 
