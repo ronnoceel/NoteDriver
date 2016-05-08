@@ -59,12 +59,11 @@ public class Note {
     }
 
     public String toString() {
-        return mText + ITEM_SEP + ITEM_SEP + FORMAT.format(mDate);
+        return mText + ITEM_SEP + FORMAT.format(mDate);
     }
 
     public String toLog() {
-        return "Text:" + mText + ITEM_SEP
-                + ITEM_SEP + "Date:" + FORMAT.format(mDate) + "\n";
+        return "Text:" + mText + ITEM_SEP + "Date:" + FORMAT.format(mDate) + "\n";
     }
 
 

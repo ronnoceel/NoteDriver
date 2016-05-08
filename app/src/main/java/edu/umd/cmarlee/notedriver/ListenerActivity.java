@@ -3,6 +3,7 @@ package edu.umd.cmarlee.notedriver;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ public class ListenerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listener_view);
+        Log.i("ListenerActivity", getApplicationContext().getFilesDir().toString());
         File file = new File(getApplicationContext().getFilesDir(), FILE_NAME);
         if (!(file.exists())){
             try {
@@ -30,7 +32,6 @@ public class ListenerActivity extends Activity {
                 e.printStackTrace();
             }
         }
-
         Button notes_button = (Button) findViewById(R.id.notes_button);
         notes_button.setOnClickListener(new View.OnClickListener() {
             @Override
