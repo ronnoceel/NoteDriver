@@ -21,18 +21,15 @@ public class Note {
             "yyyy-MM-dd HH:mm:ss", Locale.US);
 
     private String mText = new String();
-    private String mSubject = new String();
     private Date mDate = new Date();
 
-
-    Note(String subject, String text, Date date){
+    Note(String text, Date date){
         this.mText = text;
-        this.mSubject = subject;
         this.mDate = date;
     }
+
     Note(Intent intent){
         mText = intent.getStringExtra(Note.TEXT);
-        mSubject = intent.getStringExtra(Note.SUBJECT);
         try {
             mDate = Note.FORMAT.parse(intent.getStringExtra(Note.DATE));
         } catch (ParseException e) {
@@ -47,12 +44,6 @@ public class Note {
     public void setText(String text){
         mText = text;
     }
-    public String getSubject(){
-        return mSubject;
-    }
-    public void setSubject(String subject){
-        mSubject = subject;
-    }
     public Date getDate(){
         return mDate;
     }
@@ -60,21 +51,19 @@ public class Note {
         mDate = date;
     }
 
-    public static void packageIntent(Intent intent, String subject ,String text,
+    public static void packageIntent(Intent intent, String text,
                                      Date date){
         intent.putExtra(Note.TEXT, text);
-        intent.putExtra(Note.SUBJECT, subject);
         intent.putExtra(Note.DATE, FORMAT.format(date));
 
     }
 
     public String toString() {
-        return mSubject + ITEM_SEP + mText + ITEM_SEP + FORMAT.format(mDate);
+        return mText + ITEM_SEP + FORMAT.format(mDate);
     }
 
     public String toLog() {
-        return "Text:" + mText + ITEM_SEP + "Subject:" + mSubject
-                + ITEM_SEP + "Date:" + FORMAT.format(mDate) + "\n";
+        return "Text:" + mText + ITEM_SEP + "Date:" + FORMAT.format(mDate) + "\n";
     }
 
 

@@ -26,7 +26,7 @@ import java.util.Date;
 public class NoteListActivity extends ListActivity {
 
     private static final int ADD_TODO_ITEM_REQUEST = 0;
-    private static final String FILE_NAME = "NotesList1.txt";
+    private static final String FILE_NAME = "NotesList.txt";
     private static final String TAG = "NoteDriver";
 
     private static final int ADD_REQUEST_CODE = 1;
@@ -55,44 +55,17 @@ public class NoteListActivity extends ListActivity {
 
                 Note note = (Note) adapter.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), NoteView.class);
-                Note.packageIntent(intent,note.getText(),note.getSubject(),note.getDate());
+                Note.packageIntent(intent,note.getText(),note.getDate());
                 startActivity(intent);
             }
-
-
         });
-
-        PrintWriter writer = null;
-        try {
-            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
-            writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
-                    fos)));
-
-            writer.println("This is a subject");
-            writer.println("This is example text");
-            writer.println("2016-12-05 02:36:11");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (null != writer) {
-                writer.close();
-            }
-        }
-
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         Log.i(TAG, "Entered onActivityResult()");
 
-        // TODO - Check result code and request code
-        // if user submitted a new ToDoItem
-        // Create a new ToDoItem from the data Intent
-        // and then add it to the adapter
         switch (resultCode) {
             case RESULT_CANCELED:
                 Log.i(TAG, "Returned after canceling");
@@ -104,14 +77,9 @@ public class NoteListActivity extends ListActivity {
         }
     }
 
-    // Do not modify below here
-
     @Override
     public void onResume() {
         super.onResume();
-
-        // Load saved ToDoItems, if necessary
-
         if (mAdapter.getCount() == 0)
             loadItems();
     }
@@ -158,32 +126,23 @@ public class NoteListActivity extends ListActivity {
 
     }
 
-    // Load stored ToDoItems
-    //TODO: REDO this method! It will only read one line at a time for each field of the Note object.
+
     private void loadItems() {
         BufferedReader reader = null;
-        //TODO: get rid of the saveItems() (line below) when we have actual file writing.
-        saveItems();
         try {
             FileInputStream fis = openFileInput(FILE_NAME);
             reader = new BufferedReader(new InputStreamReader(fis));
-            Log.i(TAG, "File was read");
             String text = null;
-            String subject = null;
             Date date = null;
 
-            while ((subject = reader.readLine()) != null) {
-                //TODO: Never gets here... figure this one out pls
-                Log.i(TAG, "got here");
-
-                text = reader.readLine();
+            while (null != (text = reader.readLine())) {
+                Log.i(TAG, "Text is :" + text);
                 date = Note.FORMAT.parse(reader.readLine());
-                Note note = new Note(text, subject, date);
+                Note note = new Note(text,date);
+                Log.i(TAG, "Date is :" + date);
 
                 mAdapter.add(note);
-
             }
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -209,15 +168,12 @@ public class NoteListActivity extends ListActivity {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
                     fos)));
-            // temp fix for  writing notes to file
-            writer.println(new Note("this is a subject", "this is the body of our note", new Date()).toString());
-            writer.println(new Note("this is a subject", "another note", new Date()).toString());
 
-            /*for (int idx = 0; idx < mAdapter.getCount(); idx++) {
+            for (int idx = 0; idx < mAdapter.getCount(); idx++) {
 
                 writer.println(mAdapter.getItem(idx));
 
-            }*/
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

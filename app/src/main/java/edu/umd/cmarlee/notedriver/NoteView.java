@@ -22,10 +22,6 @@ public class NoteView extends Activity {
 
         Intent intent = getIntent();
 
-        String subject = intent.getStringExtra(Note.SUBJECT);
-
-        Log.i(TAG, "Subject is: " + subject);
-
         String text = intent.getStringExtra(Note.TEXT);
         Log.i(TAG, "Text is: " + text);
         Date date;
@@ -38,11 +34,11 @@ public class NoteView extends Activity {
 
         Log.i(TAG, "Date is: " + date.toString());
 
-        TextView subjectView = (TextView) findViewById(R.id.noteSubjectView);
-        TextView textView = (TextView) findViewById(R.id.noteTextView);
-        TextView dateView = (TextView) findViewById(R.id.noteDateView);
+        //TextView subjectView = (TextView) findViewById(R.id.note);
+        TextView textView = (TextView) findViewById(R.id.note_text_view);
+        TextView dateView = (TextView) findViewById(R.id.note_date_view);
 
-        subjectView.setText(subject);
+        //subjectView.setText(subject);
         textView.setText(text);
         dateView.setText(date.toString());
     }

@@ -6,13 +6,15 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/subjectView"
+        android:id="@+id/note_preview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#696969">
+        android:textColor="#696969"
+        android:singleLine="true"
+        android:ellipsize="end">
     </TextView>
 
     <TextView
@@ -20,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/subjectView"
+        android:layout_below="@id/note_preview"
         android:text="@string/date_string"
         android:textColor="#696969">
     </TextView>
