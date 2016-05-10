@@ -10,12 +10,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hound.android.sdk.VoiceSearch;
@@ -30,10 +27,8 @@ import com.hound.core.model.sdk.PartialTranscript;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Date;
@@ -73,7 +68,7 @@ public class ListenerActivity extends Activity {
         });
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //temp = (TextView) findViewById(R.id.temp);
-
+/*
         Button add_note = (Button) findViewById(R.id.add_note_button);
         add_note.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,21 +86,7 @@ public class ListenerActivity extends Activity {
                     e.printStackTrace();
                 }
             }
-        });
-
-        Button delete_button = (Button) findViewById(R.id.delete_list_button);
-        delete_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    File file = new File(getApplicationContext().getFilesDir(), Constants.FILE_NAME);
-
-                    FileWriter fileWriter = new FileWriter(file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        });*/
     }
 
     @Override
@@ -198,7 +179,6 @@ public class ListenerActivity extends Activity {
                 Log.e("TAG NOTE", transcript.getPartialTranscript().replaceFirst(command + " ", ""));
                 //temp.setText(note);
             }
-
 
             if (note.contains("take notes")) {
                 listening = true;
