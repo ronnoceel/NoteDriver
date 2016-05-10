@@ -99,7 +99,6 @@ public class NoteListActivity extends ListActivity {
         super.onCreateOptionsMenu(menu);
 
         menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, "Delete all");
-        menu.add(Menu.NONE, MENU_DUMP, Menu.NONE, "Dump to log");
         return true;
     }
 
@@ -109,22 +108,11 @@ public class NoteListActivity extends ListActivity {
             case MENU_DELETE:
                 mAdapter.clear();
                 return true;
-            case MENU_DUMP:
-                dump();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void dump() {
-
-        for (int i = 0; i < mAdapter.getCount(); i++) {
-            String data = ((Note) mAdapter.getItem(i)).toLog();
-            Log.i(TAG,	"Item " + i + ": " + data.replace(Note.ITEM_SEP, ","));
-        }
-
-    }
 
 
     private void loadItems() {

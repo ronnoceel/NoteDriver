@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -27,8 +28,6 @@ import com.hound.android.sdk.util.HoundRequestInfoFactory;
 import com.hound.core.model.sdk.HoundRequestInfo;
 import com.hound.core.model.sdk.HoundResponse;
 import com.hound.core.model.sdk.PartialTranscript;
-
-import org.w3c.dom.Text;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -74,7 +73,15 @@ public class ListenerActivity extends Activity {
             }
         });
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
+        //temp = (TextView) findViewById(R.id.temp);
+/*
+        Button add_note = (Button) findViewById(R.id.add_note_button);
+        add_note.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    File file = new File(getApplicationContext().getFilesDir(), Constants.FILE_NAME);
+*/
         speech=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -175,12 +182,19 @@ public class ListenerActivity extends Activity {
                 Log.e("TAG NOTE", transcript.getPartialTranscript().replaceFirst(command + " ", ""));
             }
 
+
             if (note.contains("take notes")) {
                 listening = true;
                 command = "take notes";
+                View view = findViewById(R.id.notes_button);
+                View root = view.getRootView();
+                root.setBackgroundColor(Color.parseColor("#a4c639"));
             } else if (note.contains("take note")) {
                 listening = true;
                 command = "take note";
+                View view = findViewById(R.id.notes_button);
+                View root = view.getRootView();
+                root.setBackgroundColor(Color.parseColor("#a4c639"));
             }
         }
 
@@ -196,6 +210,10 @@ public class ListenerActivity extends Activity {
             voiceSearch = null;
             listening = false;
             note = "";
+            View view = findViewById(R.id.notes_button);
+            View root = view.getRootView();
+            root.setBackgroundColor(getResources().getColor(android.R.color.background_dark));
+            //temp.setText("");
             startSearch();
         }
 
