@@ -41,7 +41,6 @@ public class NoteListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.note_lister);
 
         lv = getListView();
 
@@ -87,8 +86,6 @@ public class NoteListActivity extends ListActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
-        // Save ToDoItems
 
         saveItems();
 
@@ -149,14 +146,12 @@ public class NoteListActivity extends ListActivity {
         }
     }
 
-    // Save ToDoItems to file
     private void saveItems() {
         PrintWriter writer = null;
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
                     fos)));
-
             for (int idx = 0; idx < mAdapter.getCount(); idx++) {
 
                 writer.println(mAdapter.getItem(idx));

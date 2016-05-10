@@ -68,41 +68,6 @@ public class ListenerActivity extends Activity {
             }
         });
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //temp = (TextView) findViewById(R.id.temp);
-        /*
-        Button add_note = (Button) findViewById(R.id.add_note_button);
-        add_note.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    File file = new File(getApplicationContext().getFilesDir(), Constants.FILE_NAME);
-
-                    FileWriter fileWriter = new FileWriter(file, true);
-
-                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                    bufferedWriter.write("This is example text\n");
-                    bufferedWriter.write(Note.FORMAT.format(new Date()) + "\n");
-                    bufferedWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        Button delete_button = (Button) findViewById(R.id.delete_list_button);
-        delete_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    File file = new File(getApplicationContext().getFilesDir(), Constants.FILE_NAME);
-
-                    FileWriter fileWriter = new FileWriter(file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        */
     }
 
     @Override
@@ -148,9 +113,6 @@ public class ListenerActivity extends Activity {
             Log.e("TAG", "A+ try catching");
         }
 
-
-        // for the first search lastConversationState will be null, this is okay.  However any future
-        // searches may return us a conversation state to use.  Add it to the request info when we have one.
         requestInfo.setConversationState(lastConversationState);
 
         return requestInfo;
@@ -183,7 +145,6 @@ public class ListenerActivity extends Activity {
 
         /**
          * Called every time a new partial transcription is received from the Hound server.
-         * This is used for providing feedback to the user of the server's interpretation of their query.
          *
          */
         @Override
@@ -277,8 +238,7 @@ public class ListenerActivity extends Activity {
             e.printStackTrace();
         }
     }
-
-
+    
     private static String exceptionToString(final Exception ex) {
         try {
             final StringWriter sw = new StringWriter(1024);
