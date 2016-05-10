@@ -68,7 +68,7 @@ public class ListenerActivity extends Activity {
         });
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //temp = (TextView) findViewById(R.id.temp);
-/*
+
         Button add_note = (Button) findViewById(R.id.add_note_button);
         add_note.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +86,7 @@ public class ListenerActivity extends Activity {
                     e.printStackTrace();
                 }
             }
-        });*/
+        });
     }
 
     @Override
@@ -100,7 +100,7 @@ public class ListenerActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (voiceSearch == null) {
+        /*if (voiceSearch == null) {
 
             Log.e(TAG, "listening");
             startSearch();
@@ -114,7 +114,7 @@ public class ListenerActivity extends Activity {
                 voiceSearch.abort();
             }
 
-        }
+        }*/
     }
 
     private HoundRequestInfo getHoundRequestInfo() {
