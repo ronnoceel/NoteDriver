@@ -25,7 +25,7 @@ import java.util.Date;
 
 public class NoteListActivity extends ListActivity {
 
-    private static final int ADD_TODO_ITEM_REQUEST = 0;
+    private static final int ADD_NOTE_REQUEST = 0;
     private static final String FILE_NAME = "NotesList.txt";
     private static final String TAG = "NoteDriver";
 
@@ -55,8 +55,9 @@ public class NoteListActivity extends ListActivity {
 
                 Note note = (Note) adapter.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), NoteView.class);
+                intent.putExtra("pos" , position);
                 Note.packageIntent(intent,note.getText(),note.getDate());
-                startActivity(intent);
+                startActivityForResult(intent, ADD_NOTE_REQUEST);
             }
         });
     }
@@ -71,8 +72,10 @@ public class NoteListActivity extends ListActivity {
                 Log.i(TAG, "Returned after canceling");
                 break;
             case RESULT_OK:
-                Note note = new Note(data);
-                mAdapter.add(note);
+                int position = data.getIntExtra("pos" , 0);
+                Note note = (Note) mAdapter.getItem(position);
+                note.setText(data.getStringExtra(Note.TEXT));
+                getListView().setAdapter(mAdapter);
                 break;
         }
     }
