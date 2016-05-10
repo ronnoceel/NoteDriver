@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -68,7 +69,7 @@ public class ListenerActivity extends Activity {
         });
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //temp = (TextView) findViewById(R.id.temp);
-
+        /*
         Button add_note = (Button) findViewById(R.id.add_note_button);
         add_note.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +88,21 @@ public class ListenerActivity extends Activity {
                 }
             }
         });
+
+        Button delete_button = (Button) findViewById(R.id.delete_list_button);
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    File file = new File(getApplicationContext().getFilesDir(), Constants.FILE_NAME);
+
+                    FileWriter fileWriter = new FileWriter(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        */
     }
 
     @Override
@@ -100,7 +116,7 @@ public class ListenerActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        /*if (voiceSearch == null) {
+        if (voiceSearch == null) {
 
             Log.e(TAG, "listening");
             startSearch();
@@ -114,7 +130,7 @@ public class ListenerActivity extends Activity {
                 voiceSearch.abort();
             }
 
-        }*/
+        }
     }
 
     private HoundRequestInfo getHoundRequestInfo() {
@@ -180,12 +196,19 @@ public class ListenerActivity extends Activity {
                 //temp.setText(note);
             }
 
+
             if (note.contains("take notes")) {
                 listening = true;
                 command = "take notes";
+                View view = findViewById(R.id.notes_button);
+                View root = view.getRootView();
+                root.setBackgroundColor(Color.parseColor("#a4c639"));
             } else if (note.contains("take note")) {
                 listening = true;
                 command = "take note";
+                View view = findViewById(R.id.notes_button);
+                View root = view.getRootView();
+                root.setBackgroundColor(Color.parseColor("#a4c639"));
             }
         }
 
@@ -198,6 +221,9 @@ public class ListenerActivity extends Activity {
             Log.e("TAG", "onResponse()");
             voiceSearch = null;
             listening = false;
+            View view = findViewById(R.id.notes_button);
+            View root = view.getRootView();
+            root.setBackgroundColor(getResources().getColor(android.R.color.background_dark));
             //temp.setText("");
             startSearch();
         }
