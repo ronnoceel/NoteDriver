@@ -9,6 +9,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -24,6 +26,12 @@ public class NoteAdapter extends BaseAdapter {
     }
     public void add(Note note){
         mNotes.add(note);
+        Collections.sort(mNotes, new Comparator<Note>() {
+            @Override
+            public int compare(Note lhs, Note rhs) {
+                return rhs.getDate().compareTo(lhs.getDate());
+            }
+        });
         notifyDataSetChanged();
     }
 

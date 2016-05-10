@@ -20,11 +20,4 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete List"
-        android:id="@+id/delete_list_button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/add_note_button" />
 </RelativeLayout>

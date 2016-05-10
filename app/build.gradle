@@ -17,6 +17,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+    }
 }
 
 dependencies {
@@ -25,3 +33,20 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
 }
+
+repositories {
+    maven {
+        url 'https://houndify.com/maven/'
+    }
+}
+
+dependencies {
+    compile ('hound.android:hound-sdk:0.2.15@aar'){
+        transitive=true
+    }
+
+    compile ('hound.android:phrasespotter:1.4.0'){
+        transitive=true
+    }
+}
+
