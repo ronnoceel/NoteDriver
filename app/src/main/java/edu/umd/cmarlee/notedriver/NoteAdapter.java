@@ -23,6 +23,7 @@ public class NoteAdapter extends BaseAdapter {
         mContext = context;
     }
     public void add(Note note){
+
         mNotes.add(note);
         notifyDataSetChanged();
     }
