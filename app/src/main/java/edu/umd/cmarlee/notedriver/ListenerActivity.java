@@ -8,11 +8,14 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hound.android.sdk.VoiceSearch;
@@ -25,6 +28,8 @@ import com.hound.core.model.sdk.HoundRequestInfo;
 import com.hound.core.model.sdk.HoundResponse;
 import com.hound.core.model.sdk.PartialTranscript;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -32,6 +37,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 public class ListenerActivity extends Activity {
@@ -44,6 +50,7 @@ public class ListenerActivity extends Activity {
     private boolean listening = false;
     private String command = "";
     private String note = "";
+    private TextToSpeech speech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,26 +74,15 @@ public class ListenerActivity extends Activity {
             }
         });
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //temp = (TextView) findViewById(R.id.temp);
-/*
-        Button add_note = (Button) findViewById(R.id.add_note_button);
-        add_note.setOnClickListener(new View.OnClickListener() {
+
+        speech=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
-            public void onClick(View view) {
-                try {
-                    File file = new File(getApplicationContext().getFilesDir(), Constants.FILE_NAME);
-
-                    FileWriter fileWriter = new FileWriter(file, true);
-
-                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                    bufferedWriter.write("This is example text\n");
-                    bufferedWriter.write(Note.FORMAT.format(new Date()) + "\n");
-                    bufferedWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    speech.setLanguage(Locale.UK);
                 }
             }
-        });*/
+        });
     }
 
     @Override
@@ -177,7 +173,6 @@ public class ListenerActivity extends Activity {
             else if (listening == true) {
                 note = transcript.getPartialTranscript().replaceFirst(command+" ", "");
                 Log.e("TAG NOTE", transcript.getPartialTranscript().replaceFirst(command + " ", ""));
-                //temp.setText(note);
             }
 
             if (note.contains("take notes")) {
@@ -194,11 +189,13 @@ public class ListenerActivity extends Activity {
 
             if (listening == true) {
                 saveItems(note);
+                speech.setSpeechRate((float) 0.5);
+                speech.speak("Your note says "+note, TextToSpeech.QUEUE_FLUSH, null);
             }
             Log.e("TAG", "onResponse()");
             voiceSearch = null;
             listening = false;
-            //temp.setText("");
+            note = "";
             startSearch();
         }
 

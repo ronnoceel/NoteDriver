@@ -14,8 +14,10 @@ public class Constants {
     //public static final String CLIENT_KEY = "EP-X-hLgbDX2gi0a6dhl78J5_igDjS5ALhAZwn19zl4g0Ct5STLrAZqoZ1Esuz_w6S-B6QOTDfvhmTLTt3vXSw==";
 
     //Connor's Keys
-    public static final String CLIENT_ID = "hcEzW_Xq7OycLUQn_9gDjg==";
-    public static final String CLIENT_KEY = "_UNwm5AlQY61L1LEtds7XGDnkk28xXABZh9MOHvXglddz7yLs3aJzUEFyB0U1V7Se3U5Lb8aJYAfNuTKmyiHJw==";
+    //public static final String CLIENT_ID = "hcEzW_Xq7OycLUQn_9gDjg==";
+    //public static final String CLIENT_KEY = "_UNwm5AlQY61L1LEtds7XGDnkk28xXABZh9MOHvXglddz7yLs3aJzUEFyB0U1V7Se3U5Lb8aJYAfNuTKmyiHJw==";
 
+    public static final String CLIENT_ID = "3VS1mNomrQhpQF_WT5ouaQ==";
+    public static final String CLIENT_KEY = "OwjvIdzatCTXsRFAw5D0v-T4mHFg72KPvyjcVr2Bw6Hz5iebJeYrlyXXDji90doTnDj_WCXypoE8HK_ImdXpGw==";
     public static final String FILE_NAME = "NotesList.txt";
 }
