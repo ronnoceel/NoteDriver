@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 public class ListenerActivity extends Activity {
@@ -45,6 +47,7 @@ public class ListenerActivity extends Activity {
     private boolean listening = false;
     private String command = "";
     private String note = "";
+    private TextToSpeech speech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,15 @@ public class ListenerActivity extends Activity {
             }
         });
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        speech=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    speech.setLanguage(Locale.UK);
+                }
+            }
+        });
     }
 
     @Override
@@ -130,6 +142,7 @@ public class ListenerActivity extends Activity {
         if (voiceSearch != null) {
             return; // We are already searching
         }
+        listening = false;
         Log.e("TAG", "startSearch()");
         voiceSearch = new VoiceSearch.Builder()
                 .setRequestInfo(getHoundRequestInfo())
@@ -152,9 +165,10 @@ public class ListenerActivity extends Activity {
             if (listening == false)
                 note = transcript.getPartialTranscript();
             else if (listening == true) {
-                note = transcript.getPartialTranscript().replaceFirst(command+" ", "");
-                Log.e("TAG NOTE", transcript.getPartialTranscript().replaceFirst(command + " ", ""));
-                //temp.setText(note);
+                //note = transcript.getPartialTranscript().replaceFirst(command+" ", "");
+                note = transcript.getPartialTranscript().replaceFirst(transcript.getPartialTranscript().
+                        substring(0, transcript.getPartialTranscript().indexOf(command)+command.length()), "");
+                Log.e("TAG NOTE", note);
             }
 
 
@@ -170,6 +184,12 @@ public class ListenerActivity extends Activity {
                 View view = findViewById(R.id.notes_button);
                 View root = view.getRootView();
                 root.setBackgroundColor(Color.parseColor("#a4c639"));
+            } else if (note.contains("take no")) {
+                listening = true;
+                command = "take no";
+                View view = findViewById(R.id.notes_button);
+                View root = view.getRootView();
+                root.setBackgroundColor(Color.parseColor("#a4c639"));
             }
         }
 
@@ -178,10 +198,13 @@ public class ListenerActivity extends Activity {
 
             if (listening == true) {
                 saveItems(note);
+                speech.setSpeechRate((float) 0.66);
+                speech.speak("Your note says "+note, TextToSpeech.QUEUE_FLUSH, null);
             }
             Log.e("TAG", "onResponse()");
             voiceSearch = null;
             listening = false;
+            note = "";
             View view = findViewById(R.id.notes_button);
             View root = view.getRootView();
             root.setBackgroundColor(getResources().getColor(android.R.color.background_dark));
@@ -220,7 +243,7 @@ public class ListenerActivity extends Activity {
     };
 
     private void saveItems(String note) {
-
+        note = note.trim();
         PrintWriter writer = null;
 
         try {
@@ -238,7 +261,8 @@ public class ListenerActivity extends Activity {
             e.printStackTrace();
         }
     }
-    
+
+
     private static String exceptionToString(final Exception ex) {
         try {
             final StringWriter sw = new StringWriter(1024);
